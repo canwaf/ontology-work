@@ -1,3 +1,4 @@
+
 # Prefixes
 
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
@@ -5,105 +6,88 @@
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
-@prefix environment-agency: <http://environment.data.gov.uk/ontology:> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix ea-catchment: <http://environment.data.gov.uk/ontology/catchment/> .
 
-environment-agency:catchment-hierachy-ontology
-    rdf:type owl:Ontology ;
+ea-catchment:catchment-hierachy-ontology rdf:type owl:Ontology ;
     dcterms:title "Catchment hierachy ontology"@en ;
     dcterms:created "2025-06-25"^^xsd:date ;
-    dcterms:rights "Open Government Licence"@en ;
+    dcterms:modified "2026-07-01"^^xsd:date ;
+    dcterms:rights "Open Government Licence v3"@en ;
     dcterms:description "A model describing a hierachy of operational catchment locations or areas that are used by the Environment Agency to organise data and activties."@en .
 
 # Classes
 
-environment-agency:OperationalLocation rdf:type owl:Class .
-environment-agency:OperationalLocation rdfs:isDefinedBy environment-agency:catchment-hierachy-ontology .
-environment-agency:OperationalLocation rdfs:label "OperationalLocation"@en .
-environment-agency:OperationalLocation rdfs:comment "A geographically bounded region that serves as a functional unit for a specific organization, authority, or stakeholder to conduct operations, exercise jurisdiction, provide services, or manage resources within defined spatial limits."@en .
+ea-catchment:OperationalLocation rdf:type owl:Class ;
+    rdfs:isDefinedBy ea-catchment:catchment-hierachy-ontology ;
+    rdfs:label "OperationalLocation"@en ;
+    rdfs:comment "A geographically bounded region that serves as a functional unit for a specific organization, authority, or stakeholder to conduct operations, exercise jurisdiction, provide services, or manage resources within defined spatial limits."@en .
 
+ea-catchment:ManagementCatchment rdf:type owl:Class ;
+    rdfs:isDefinedBy ea-catchment:catchment-hierachy-ontology ;
+    rdfs:label "Management Catchment"@en ;
+    rdfs:subClassOf ea-catchment:OperationalLocation ;
+    rdfs:comment "Large catchments with many, often interconnected, water bodies. They are based on the catchments used for managing the availability of water for abstraction and flood risk management"@en .
 
-environment-agency:EAarea rdf:type owl:Class .
-environment-agency:EAarea rdfs:isDefinedBy environment-agency:catchment-hierachy-ontology .
-environment-agency:EAarea rdfs:label "EA area"@en .
-environment-agency:EAarea rdfs:subClassOf environment-agency:OperationalLocation.
-environment-agency:EAarea rdfs:comment "Operational geographical boundaries used by the Environment Agency to deliver its work across England"@en .
+ea-catchment:OperationalCatchment rdf:type owl:Class ;
+    rdfs:isDefinedBy ea-catchment:catchment-hierachy-ontology ;
+    rdfs:label "Operational Catchment"@en ;
+    rdfs:subClassOf ea-catchment:OperationalLocation ;
+    rdfs:comment "Small geographical areas covering a small number of water bodies (typically 1 to 10) based around the same local geography or sharing specific pressures"@en .
 
-environment-agency:ManagementCatchment rdf:type owl:Class .
-environment-agency:ManagementCatchment	rdfs:isDefinedBy environment-agency:catchment-hierachy-ontology .
-environment-agency:ManagementCatchment rdfs:label "Management Catchment"@en .
-environment-agency:ManagementCatchment rdfs:subClassOf environment-agency:OperationalLocation.
-environment-agency:ManagementCatchment rdfs:comment "Large catchments with many, often interconnected, water bodies. They are based on the catchments used for managing the availability of water for abstraction and flood risk management"@en .
+ea-catchment:RiverBasinDistrict rdf:type owl:Class ;
+    rdfs:isDefinedBy ea-catchment:catchment-hierachy-ontology ;
+    rdfs:label "River Basin District"@en ;
+    rdfs:subClassOf ea-catchment:OperationalLocation ;
+    rdfs:comment "The main unit for management of river basins under the WFD Regulations. A river basin district includes the area of land and sea made up of one or more neighbouring river basins together with their associated groundwater and coastal waters "@en .
 
-environment-agency:OperationalCatchment rdf:type owl:Class .
-environment-agency:OperationalCatchment	rdfs:isDefinedBy environment-agency:catchment-hierachy-ontology .
-environment-agency:OperationalCatchment rdfs:label "Operational Catchment"@en .
-environment-agency:OperationalCatchment rdfs:subClassOf environment-agency:OperationalLocation.
-environment-agency:OperationalCatchment rdfs:comment "Small geographical areas covering a small number of water bodies (typically 1 to 10) based around the same local geography or sharing specific pressures"@en .
-
-environment-agency:RiverBasinDistrict rdf:type owl:Class .
-environment-agency:RiverBasinDistrict	rdfs:isDefinedBy environment-agency:catchment-hierachy-ontology .
-environment-agency:RiverBasinDistrict rdfs:label "River Basin District"@en .
-environment-agency:RiverBasinDistrict rdfs:subClassOf environment-agency:OperationalLocation.
-environment-agency:RiverBasinDistrict rdfs:comment "The main unit for management of river basins under the WFD Regulations. A river basin district includes the area of land and sea made up of one or more neighbouring river basins together with their associated groundwater and coastal waters "@en .
-
-environment-agency:Waterbody rdf:type owl:Class .
-environment-agency:Waterbody	rdfs:isDefinedBy environment-agency:catchment-hierachy-ontology .
-environment-agency:Waterbody rdfs:label "Water body"@en .
-environment-agency:Waterbody rdfs:subClassOf environment-agency:OperationalLocation.
-environment-agency:Waterbody rdfs:comment "A discrete and significant element of surface water such as a lake or reservoir or entire (or part) stream, river or canal, estuary or stretch of coastal water"@en .
-
-environment-agency:WaterBodyType rdf:type owl:Class .
-environment-agency:WaterBodyType rdfs:isDefinedBy environment-agency:catchment-hierachy-ontology .
-environment-agency:WaterBodyType rdfs:label "WaterBodyType"@en .
-
+ea-catchment:Waterbody rdf:type owl:Class ;
+    rdfs:isDefinedBy ea-catchment:catchment-hierachy-ontology ;
+    rdfs:label "Water body"@en ;
+    rdfs:subClassOf ea-catchment:OperationalLocation ;
+    rdfs:comment "A discrete and significant element of surface water such as a lake or reservoir or entire (or part) stream, river or canal, estuary or stretch of coastal water"@en .
 
 # Object Properties
 
-environment-agency:containedIn rdf:type owl:ObjectProperty .
-environment-agency:containedIn	rdfs:isDefinedBy environment-agency:catchment-hierachy-ontology .
-environment-agency:containedIn rdfs:domain environment-agency:OperationalLocation .
-environment-agency:containedIn rdfs:range environment-agency:OperationalLocation .
-environment-agency:containedIn rdfs:label "containedIn"@en .
+ea-catchment:containedIn rdf:type owl:ObjectProperty ;
+    rdfs:isDefinedBy ea-catchment:catchment-hierachy-ontology ;
+    rdfs:domain ea-catchment:OperationalLocation ;
+    rdfs:range ea-catchment:OperationalLocation ;
+    rdfs:label "containedIn"@en .
 
-environment-agency:downstremBody rdf:type owl:ObjectProperty .
-environment-agency:downstremBody rdfs:isDefinedBy environment-agency:catchment-hierachy-ontology .
-environment-agency:downstremBody rdfs:comment "Downstream refers to the area or direction from which water flows toward a specific point in a catchment system."@en .
-environment-agency:downstremBody rdfs:domain environment-agency:Waterbody .
-environment-agency:downstremBody rdfs:range environment-agency:Waterbody .
-environment-agency:downstremBody rdfs:label "downstremBody"@en .
+ea-catchment:downstremBody rdf:type owl:ObjectProperty ;
+    rdfs:isDefinedBy ea-catchment:catchment-hierachy-ontology ;
+    rdfs:comment "Downstream refers to the area or direction from which water flows toward a specific point in a catchment system."@en ;
+    rdfs:domain ea-catchment:Waterbody ;
+    rdfs:range ea-catchment:Waterbody ;
+    rdfs:label "downstremBody"@en ;
+    owl:inverseOf ea-catchment:upstreamBody .
 
-environment-agency:upstreamBody rdf:type owl:ObjectProperty .
-environment-agency:upstreamBody	rdfs:isDefinedBy environment-agency:catchment-hierachy-ontology .
-environment-agency:downstremBody rdfs:comment "Upstream refers to the area or direction from which water flows toward a specific point in a catchment system."@en .
-environment-agency:upstreamBody rdfs:domain environment-agency:Waterbody .
-environment-agency:upstreamBody rdfs:range environment-agency:Waterbody .
-environment-agency:upstreamBody rdfs:label "upstreamBody"@en .
+ea-catchment:upstreamBody rdf:type owl:ObjectProperty ;
+    rdfs:isDefinedBy ea-catchment:catchment-hierachy-ontology ;
+    rdfs:comment "Upstream refers to the area or direction from which water flows toward a specific point in a catchment system."@en ;
+    rdfs:domain ea-catchment:Waterbody ;
+    rdfs:range ea-catchment:Waterbody ;
+    rdfs:label "upstreamBody"@en ;
+    owl:inverseOf ea-catchment:downstremBody .
 
-environment-agency:waterBodyType rdf:type owl:ObjectProperty .
-environment-agency:waterBodyType rdfs:isDefinedBy environment-agency:catchment-hierachy-ontology .
-environment-agency:waterBodyType rdfs:domain environment-agency:Waterbody .
-environment-agency:waterBodyType rdfs:range environment-agency:WaterBodyType .
-environment-agency:waterBodyType rdfs:label "waterBodyType"@en .
+ea-catchment:waterBodyType rdf:type owl:ObjectProperty ;
+    rdfs:isDefinedBy ea-catchment:catchment-hierachy-ontology ;
+    rdfs:domain ea-catchment:Waterbody ;
+    rdfs:range ea-catchment:WaterBodyType ;
+    rdfs:label "waterBodyType"@en .
 
+# Property restrictions (example)
 
-# Datatype Properties
+ea-catchment:WaterBodyType a skos:ConceptScheme ;
+    skos:notation "ea-catchment/waterbody-type" .
 
-
-environment-agency:description rdf:type owl:DatatypeProperty .
-environment-agency:description	rdfs:isDefinedBy environment-agency:catchment-hierachy-ontology .
-environment-agency:description rdfs:domain environment-agency:OperationalLocation .
-environment-agency:description rdfs:range xsd:string .
-environment-agency:description rdfs:label "description"@en .
-
-environment-agency:imageURL rdf:type owl:DatatypeProperty .
-environment-agency:imageURL rdfs:isDefinedBy environment-agency:catchment-hierachy-ontology .
-environment-agency:imageURL rdfs:domain environment-agency:OperationalLocation .
-environment-agency:imageURL rdfs:range xsd:string .
-environment-agency:imageURL rdfs:label "imageURL"@en .
-
-environment-agency:label rdf:type owl:DatatypeProperty .
-environment-agency:label rdfs:isDefinedBy environment-agency:catchment-hierachy-ontology .
-environment-agency:label rdfs:domain environment-agency:OperationalLocation .
-environment-agency:label rdfs:range xsd:string .
-environment-agency:label rdfs:label "label"@en .
-
+ea-catchment:WaterBodyTypeConcept a owl:Class ;
+    owl:intersectionOf (
+        skos:Concept
+        [
+            a owl:Restriction ;
+            owl:onProperty skos:inScheme ;
+            owl:hasValue ea-catchment:WaterBodyType
+        ]
+    ) .
