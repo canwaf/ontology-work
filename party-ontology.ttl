@@ -36,8 +36,8 @@ ea-party:IndustryClassification rdf:type owl:Class ;
 
 # Object Properties
 
-ea-party:industryClassficaion rdf:type owl:ObjectProperty ;
-    rdfs:label "industryClassficaion"@en ;
+ea-party:industryClassification rdf:type owl:ObjectProperty ;
+    rdfs:label "industryClassification"@en ;
     rdfs:comment "Indicates a unit which is part of this Organization, e.g. a Department within a larger Organization."@en ;
     rdfs:domain ea-party:Organisation ;
     rdfs:range ea-party:IndustryClassification ;

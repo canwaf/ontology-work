@@ -21,7 +21,7 @@ ea-permit:permit-ontology rdf:type owl:Ontology ;
 
 ea-permit:Permit rdf:type owl:Class ;
     rdfs:label "Permit"@en ;
-    rdfs:comment "A permit allocated to a permit holder to allow them to discharge into a waterbody at a specific point with certain constraints. The unique id for a perimit should have no special characters."@en ;
+    rdfs:comment "A permit allocated to a permit holder to allow them to discharge into a waterbody at a specific point with certain constraints. The unique id for a permit should have no special characters."@en ;
     rdfs:isDefinedBy ea-permit:permit-ontology .
 
 ea-permit:Purpose rdf:type owl:Class ;
@@ -87,10 +87,10 @@ ea-permit:permitNumber rdf:type owl:DatatypeProperty ;
     rdfs:comment "The permit number as printed including special characters as would appear on the PDF."@en ;
     rdfs:isDefinedBy ea-permit:permit-ontology .
 
-ea-permit:revoctionDate rdf:type owl:DatatypeProperty ;
+ea-permit:revocationDate rdf:type owl:DatatypeProperty ;
     rdfs:domain ea-permit:Permit ;
     rdfs:range xsd:date ;
-    rdfs:label "revoctionDate"@en ;
+    rdfs:label "revocationDate"@en ;
     rdfs:isDefinedBy ea-permit:permit-ontology .
 
 ea-permit:startDate rdf:type owl:DatatypeProperty ;
