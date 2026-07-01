@@ -14,7 +14,7 @@ ea-location:location-ontology rdf:type owl:Ontology ;
     dcterms:created "2025-06-25"^^xsd:date ;
     dcterms:modified "2026-07-01"^^xsd:date ;
     dcterms:rights "Open Government Licence v3"@en ;
-    dcterms:description "A model describing a the types of location commonly referenced by the Environment Agency."@en .
+    dcterms:description "A model describing the types of location commonly referenced by the Environment Agency."@en .
 
 # Classes
 
@@ -25,13 +25,13 @@ ea-location:Location rdf:type owl:Class ;
 ea-location:NamedLocation rdf:type owl:Class ;
     rdfs:subClassOf ea-location:Location ;
     rdfs:label "NamedLocation"@en ;
-    rdfs:comment "A geographic location with a name. The name should come from a predefined naming convention where posisble."@en ;
+    rdfs:comment "A geographic location with a name. The name should come from a predefined naming convention where possible."@en ;
     rdfs:isDefinedBy ea-location:location-ontology .
 
 ea-location:LocationWithOnlyExtent rdf:type owl:Class ;
     rdfs:subClassOf ea-location:Location ;
     rdfs:label "LocationWithOnlyExtent"@en ;
-    rdfs:comment "A geographic location that will have some geographic extent but not intentded to be used as a named or addressable. A single discharge or monitoring point for example might given only as a point co-ordinate. "@en ;
+    rdfs:comment "A geographic location that will have some geographic extent but not intended to be used as a named or addressable. A single discharge or monitoring point for example might be given only as a point coordinate. "@en ;
     rdfs:isDefinedBy ea-location:location-ontology .
 
 ea-location:OperationalLocation rdf:type owl:Class ;
@@ -43,7 +43,7 @@ ea-location:OperationalLocation rdf:type owl:Class ;
 ea-location:AddressableLocation rdf:type owl:Class ;
     rdfs:subClassOf ea-location:NamedLocation ;
     rdfs:label "AddressableLocation"@en ;
-    rdfs:comment "A geographic location that can be assigned an addresss. For example an postal address or equivalent."@en ;
+    rdfs:comment "A geographic location that can be assigned an addresss. For example, a postal address or equivalent."@en ;
     rdfs:isDefinedBy ea-location:location-ontology .
 
 # Object Properties
@@ -58,7 +58,7 @@ ea-location:associatedOperationalLocation rdf:type owl:ObjectProperty ;
     rdfs:domain ea-location:Location ;
     rdfs:range ea-location:OperationalLocation ;
     rdfs:label "associatedOperationalLocation"@en ;
-    rdfs:comment "Associates in someway a location with an OperationalLocation this allows for the lose but valuble assciation between places and an operational area."@en ;
+    rdfs:comment "Associates in some way a Location with a OperationalLocation this allows for the loose but valuable association between places and an operational area."@en ;
     rdfs:isDefinedBy ea-location:location-ontology .
 
 ea-location:siteType rdf:type owl:ObjectProperty ;

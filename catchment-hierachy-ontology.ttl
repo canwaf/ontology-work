@@ -55,12 +55,12 @@ ea-catchment:containedIn rdf:type owl:ObjectProperty ;
     rdfs:range ea-catchment:OperationalLocation ;
     rdfs:label "containedIn"@en .
 
-ea-catchment:downstremBody rdf:type owl:ObjectProperty ;
+ea-catchment:downstreamBody rdf:type owl:ObjectProperty ;
     rdfs:isDefinedBy ea-catchment:catchment-hierachy-ontology ;
     rdfs:comment "Downstream refers to the area or direction from which water flows toward a specific point in a catchment system."@en ;
     rdfs:domain ea-catchment:Waterbody ;
     rdfs:range ea-catchment:Waterbody ;
-    rdfs:label "downstremBody"@en ;
+    rdfs:label "downstreamBody"@en ;
     owl:inverseOf ea-catchment:upstreamBody .
 
 ea-catchment:upstreamBody rdf:type owl:ObjectProperty ;
@@ -69,7 +69,7 @@ ea-catchment:upstreamBody rdf:type owl:ObjectProperty ;
     rdfs:domain ea-catchment:Waterbody ;
     rdfs:range ea-catchment:Waterbody ;
     rdfs:label "upstreamBody"@en ;
-    owl:inverseOf ea-catchment:downstremBody .
+    owl:inverseOf ea-catchment:downstreamBody .
 
 ea-catchment:waterBodyType rdf:type owl:ObjectProperty ;
     rdfs:isDefinedBy ea-catchment:catchment-hierachy-ontology ;
