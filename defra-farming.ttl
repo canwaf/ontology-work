@@ -1,0 +1,28 @@
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix defra-core: <http://environment.data.gov.uk/ontology/core/> .
+@prefix defra-farming: <http://environment.data.gov.uk/ontology/farming/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://environment.data.gov.uk/ontology/water>
+    a owl:Ontology ;
+    dcterms:title "DEFRA Farming Ontology"@en ;
+    dcterms:description "Farming reusable classes and properties for DEFRA Linked Data APIs, covering Sustainable Farming Incentive Schemes, Applications, and Options."@en ;
+    dcterms:creator "Department for Environment, Food and Rural Affairs"@en ;
+    dcterms:publisher "Department for Environment, Food and Rural Affairs"@en ;
+    dcterms:license <http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/> ;
+    dcterms:created "2026-07-02"^^xsd:date ;
+    owl:versionInfo "0.1.0" ;
+    rdfs:seeAlso <http://environment.data.gov.uk/catalog> .
+
+defra-farming:Application a owl:Class ;
+    rdfs:subClassOf defra-core:Document;
+    rdfs:label "Application" ;
+    .
+
+defra-farming:Option a owl:Class ;
+    rdfs:subClassOf defra-core:DocumentPart ;
+    rdfs:label "Option" ;
+    .
+

@@ -36,6 +36,12 @@ defra-core:Site a owl:Class ;
     rdfs:label "Site"@en ;
      .
 
+defra-core:hasClassification a owl:ObjectProperty ;
+    rdfs:label "has classification"@en ;
+    rdfs:comment "Relates a resource to its classification, a resource can have multiple classifications."@en ;
+    rdfs:range skos:Concept ;
+     .
+
 # Identifiers
 defra-core:Identifier a owl:Class ;
     rdfs:label "Identifier"@en ;
