@@ -19,30 +19,25 @@ ea-catchment:catchment-hierachy-ontology rdf:type owl:Ontology ;
 # Classes
 
 ea-catchment:OperationalLocation rdf:type owl:Class ;
-    rdfs:isDefinedBy ea-catchment:catchment-hierachy-ontology ;
     rdfs:label "OperationalLocation"@en ;
     rdfs:comment "A geographically bounded region that serves as a functional unit for a specific organization, authority, or stakeholder to conduct operations, exercise jurisdiction, provide services, or manage resources within defined spatial limits."@en .
 
 ea-catchment:ManagementCatchment rdf:type owl:Class ;
-    rdfs:isDefinedBy ea-catchment:catchment-hierachy-ontology ;
     rdfs:label "Management Catchment"@en ;
     rdfs:subClassOf ea-catchment:OperationalLocation ;
     rdfs:comment "Large catchments with many, often interconnected, water bodies. They are based on the catchments used for managing the availability of water for abstraction and flood risk management"@en .
 
 ea-catchment:OperationalCatchment rdf:type owl:Class ;
-    rdfs:isDefinedBy ea-catchment:catchment-hierachy-ontology ;
     rdfs:label "Operational Catchment"@en ;
     rdfs:subClassOf ea-catchment:OperationalLocation ;
     rdfs:comment "Small geographical areas covering a small number of water bodies (typically 1 to 10) based around the same local geography or sharing specific pressures"@en .
 
 ea-catchment:RiverBasinDistrict rdf:type owl:Class ;
-    rdfs:isDefinedBy ea-catchment:catchment-hierachy-ontology ;
     rdfs:label "River Basin District"@en ;
     rdfs:subClassOf ea-catchment:OperationalLocation ;
     rdfs:comment "The main unit for management of river basins under the WFD Regulations. A river basin district includes the area of land and sea made up of one or more neighbouring river basins together with their associated groundwater and coastal waters "@en .
 
 ea-catchment:Waterbody rdf:type owl:Class ;
-    rdfs:isDefinedBy ea-catchment:catchment-hierachy-ontology ;
     rdfs:label "Water body"@en ;
     rdfs:subClassOf ea-catchment:OperationalLocation ;
     rdfs:comment "A discrete and significant element of surface water such as a lake or reservoir or entire (or part) stream, river or canal, estuary or stretch of coastal water"@en .
@@ -50,7 +45,6 @@ ea-catchment:Waterbody rdf:type owl:Class ;
 # Object Properties
 
 ea-catchment:containedIn rdf:type owl:ObjectProperty ;
-    rdfs:isDefinedBy ea-catchment:catchment-hierachy-ontology ;
     rdfs:domain ea-catchment:OperationalLocation ;
     rdfs:range ea-catchment:OperationalLocation ;
     rdfs:label "containedIn"@en .
@@ -64,7 +58,6 @@ ea-catchment:downstreamBody rdf:type owl:ObjectProperty ;
     owl:inverseOf ea-catchment:upstreamBody .
 
 ea-catchment:upstreamBody rdf:type owl:ObjectProperty ;
-    rdfs:isDefinedBy ea-catchment:catchment-hierachy-ontology ;
     rdfs:comment "Upstream refers to the area or direction from which water flows toward a specific point in a catchment system."@en ;
     rdfs:domain ea-catchment:Waterbody ;
     rdfs:range ea-catchment:Waterbody ;
@@ -72,7 +65,6 @@ ea-catchment:upstreamBody rdf:type owl:ObjectProperty ;
     owl:inverseOf ea-catchment:downstreamBody .
 
 ea-catchment:waterBodyType rdf:type owl:ObjectProperty ;
-    rdfs:isDefinedBy ea-catchment:catchment-hierachy-ontology ;
     rdfs:domain ea-catchment:Waterbody ;
     rdfs:range ea-catchment:WaterBodyType ;
     rdfs:label "waterBodyType"@en .
