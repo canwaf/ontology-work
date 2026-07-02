@@ -1,0 +1,158 @@
+@prefix adms: <http://www.w3.org/ns/adms#> .
+@prefix dcat: <http://www.w3.org/ns/dcat#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix defra-core: <http://environment.data.gov.uk/ontology/core/> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix geo: <http://www.opengis.net/ont/geosparql#> .
+@prefix org: <http://www.w3.org/ns/org#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://environment.data.gov.uk/ontology/core> a owl:Ontology ;
+    dcterms:title "DEFRA Core Ontology"@en ;
+    dcterms:description "Core reusable classes and properties for DEFRA Linked Data APIs, covering Party, Organisation, Location, Site, Identifier, Document."@en ;
+    dcterms:creator "Department for Environment, Food and Rural Affairs"@en ;
+    dcterms:publisher "Department for Environment, Food and Rural Affairs"@en ;
+    dcterms:license <http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/> ;
+    dcterms:created "2026-07-01"^^xsd:date ;
+    owl:versionInfo "0.1.0" ;
+    rdfs:seeAlso <http://environment.data.gov.uk/catalog> .
+
+defra-core:Party a owl:Class ;
+    rdfs:subClassOf foaf:Agent, prov:Agent ;
+    rdfs:label "Party"@en ;
+    rdfs:comment "An individual or group who can act as agents. For example hold permits or commit to actions."@en .
+
+defra-core:Organisation a owl:Class ;
+    rdfs:subClassOf defra-core:Party, org:Organization, foaf:Organization ;
+    rdfs:label "Organisation"@en ;
+    rdfs:comment "Represents a collection of people organized together into a community or other social, commercial or political structure. The group has some common purpose or reason for existence which goes beyond the set of people belonging to it and can act as an Agent. Organizations are often decomposable into hierarchical structures."@en .
+
+defra-core:Site a owl:Class ;
+    rdfs:subClassOf geo:Feature ;
+    rdfs:label "Site"@en ;
+     .
+
+# Identifiers
+defra-core:Identifier a owl:Class ;
+    rdfs:label "Identifier"@en ;
+    rdfs:comment "An identifier assigned to a resource under a known identifier scheme."@en ;
+    rdfs:subClassOf adms:Identifier .
+
+defra-core:IdentifierScheme a owl:Class ;
+    rdfs:label "Identifier Scheme"@en ;
+    rdfs:comment "A scheme, register or authority under which identifiers are assigned."@en ;
+    rdfs:subClassOf skos:ConceptScheme .
+
+defra-core:hasIdentifier a owl:ObjectProperty ;
+    rdfs:label "has identifier"@en ;
+    rdfs:comment "Relates a resource to an identifier assigned to it."@en ;
+    rdfs:range defra-core:Identifier .
+
+defra-core:identifierValue a owl:DatatypeProperty ;
+    rdfs:label "identifier value"@en ;
+    rdfs:comment "The literal value of an identifier."@en ;
+    rdfs:domain defra-core:Identifier ;
+    rdfs:range xsd:string .
+
+defra-core:identifierScheme a owl:ObjectProperty ;
+    rdfs:label "identifier scheme"@en ;
+    rdfs:comment "The identifier scheme under which an identifier was assigned."@en ;
+    rdfs:domain defra-core:Identifier ;
+    rdfs:range defra-core:IdentifierScheme .
+
+defra-core:identifierIssuedBy a owl:ObjectProperty ;
+    rdfs:label "identifier issued by"@en ;
+    rdfs:comment "The party responsible for issuing an identifier."@en ;
+    rdfs:domain defra-core:Identifier ;
+    rdfs:range defra-core:Party .
+
+defra-core:identifierIssuedDate a owl:DatatypeProperty ;
+    rdfs:label "identifier issued date"@en ;
+    rdfs:comment "The date on which an identifier was issued."@en ;
+    rdfs:domain defra-core:Identifier ;
+    rdfs:range xsd:date .
+
+# Documents
+defra-core:Document a owl:Class ;
+    rdfs:label "Document"@en ;
+    rdfs:comment "An information resource such as a report, notice, permit document, assessment, certificate or correspondence."@en ;
+    rdfs:subClassOf foaf:Document .
+
+defra-core:DocumentPart a owl:Class ;
+    rdfs:subClassOf defra-core:Document ;
+    rdfs:label "Document Part"@en ;
+    rdfs:comment "A section, paragraph, table, schedule, annex or other part of a document."@en ;
+     .
+
+defra-core:hasPart a owl:ObjectProperty ;
+    rdfs:subPropertyOf dcterms:hasPart ;
+    rdfs:label "has part"@en ;
+    rdfs:comment "Relates a resource to one of its parts."@en ;
+    rdfs:domain defra-core:Document ;
+    rdfs:range defra-core:DocumentPart ;
+    owl:inverseOf defra-core:partOf .
+
+defra-core:partOf a owl:ObjectProperty ;
+    rdfs:label "part of"@en ;
+    rdfs:comment "Relates a resource to a resource it forms part of."@en ;
+    rdfs:domain defra-core:DocumentPart ;
+    rdfs:range defra-core:Document ;
+    rdfs:subPropertyOf dcterms:isPartOf ;
+     .
+
+defra-core:documentType a owl:ObjectProperty ;
+    rdfs:label "document type"@en ;
+    rdfs:comment "The type or category of a document."@en ;
+    rdfs:domain defra-core:Document ;
+    rdfs:range skos:Concept .
+
+defra-core:documentText a owl:DatatypeProperty ;
+    rdfs:label "document text"@en ;
+    rdfs:comment "The textual content of a document or document part."@en ;
+    rdfs:domain defra-core:Document ;
+    rdfs:range xsd:string .
+
+# Applicability
+defra-core:Applicability a owl:Class ;
+    rdfs:label "applicability"@en ;
+    rdfs:comment "A statement describing when, where, to whom, or to what a resource applies."@en .
+
+defra-core:ApplicabilityPeriod a owl:Class ;
+    rdfs:subClassOf dcterms:PeriodOfTime ;
+    rdfs:label "Appicability Period"@en ;
+    rdfs:comment "The interval of time that the parent resource is applicable, defined by its start and end dates."@en ;
+     .
+
+defra-core:hasApplicability a owl:ObjectProperty ;
+    rdfs:label "has applicability"@en ;
+    rdfs:comment "Relates a resource to a statement describing its applicability."@en ;
+    rdfs:range defra-core:Applicability .
+
+defra-core:appliesTo a owl:ObjectProperty ;
+    rdfs:label "applies to"@en ;
+    rdfs:comment "The thing, activity, place, agent, permission, condition or context to which an applicability statement applies."@en ;
+    rdfs:domain defra-core:Applicability .
+
+defra-core:applicabilityPeriod a owl:ObjectProperty ;
+    rdfs:label "applicability period"@en ;
+    rdfs:domain defra-core:Applicability ;
+    rdfs:range defra-core:ApplicabilityPeriod ;
+     .
+
+defra-core:applicableFrom a owl:DatatypeProperty ;
+    rdfs:label "applicable from"@en ;
+    rdfs:comment "The date from which an applicability statement applies."@en ;
+    rdfs:subPropertyOf dcat:startDate ;
+    rdfs:domain defra-core:ApplicabilityPeriod ;
+    rdfs:range xsd:date .
+
+defra-core:applicableTo a owl:DatatypeProperty ;
+    rdfs:label "applicable to"@en ;
+    rdfs:comment "The date until which an applicability statement applies."@en ;
+    rdfs:subPropertyOf dcat:endDate ;
+    rdfs:domain defra-core:ApplicabilityPeriod ;
+    rdfs:range xsd:date .

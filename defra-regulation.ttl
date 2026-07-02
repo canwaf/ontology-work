@@ -1,0 +1,112 @@
+@prefix dcat: <http://www.w3.org/ns/dcat#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix defra-core: <http://environment.data.gov.uk/ontology/core/> .
+@prefix defra-reg: <http://environment.data.gov.uk/ontology/regulation/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://environment.data.gov.uk/ontology/regulation> a owl:Ontology ;
+    dcterms:title "DEFRA Regulation Ontology"@en ;
+    dcterms:description "Regulation reusable classes and properties for DEFRA Linked Data APIs, covering Permit, Condition, Limit, Breach, Driver, Action."@en ;
+    dcterms:creator "Department for Environment, Food and Rural Affairs"@en ;
+    dcterms:publisher "Department for Environment, Food and Rural Affairs"@en ;
+    dcterms:license <http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/> ;
+    dcterms:created "2026-07-01"^^xsd:date ;
+    owl:versionInfo "0.1.0" ;
+    rdfs:seeAlso <http://environment.data.gov.uk/catalog> ;
+     .
+
+defra-reg:Permit a owl:Class ;
+    rdfs:subClassOf dcat:Resource ;
+    rdfs:label "permit"@en ;
+    rdfs:comment "A regulatory permission that authorises one or more regulated activities and may subject to conditions."@en .
+
+defra-reg:PermitDocument a owl:Class ;
+    rdfs:subClassOf defra-core:Document ;
+    rdfs:label "permit document"@en ;
+    rdfs:comment "A document that records, issues, varies or describes a permit."@en .
+
+defra-reg:Condition a owl:Class ;
+    rdfs:label "Condition"@en ;
+    rdfs:comment "A condition is allocated to a permit which qualifies the discharge with a specific constraint."@en ;
+     .
+
+defra-reg:Limit a owl:Class ;
+    rdfs:label "Limit"@en ;
+    rdfs:comment "This is going to be a complex class that needs to handle upper and/or lower bounds, rolling averages, and nth percentile calculations."@en ;
+     .
+
+defra-reg:Breach a owl:Class ;
+    rdfs:label "Permit Breach"@en ;
+    rdfs:comment "A permit breach is allocated to a permit where limits set forth in conditions have been breached. A breach can be a time instant or a time period."@en ;
+     .
+
+defra-reg:Driver a owl:Class ;
+    rdfs:label "Driver"@en ;
+    rdfs:comment "To be defined."@en ;
+     .
+
+defra-reg:Action a owl:Class ;
+    rdfs:label "Action"@en ;
+    rdfs:comment "To be defined."@en ;
+     .
+
+defra-reg:DischargePoint a owl:Class ;
+    rdfs:label "discharge point"@en ;
+    rdfs:comment "A point at which a discharge enters, or is authorised to enter, the environment."@en ;
+    rdfs:subClassOf defra-core:Site .
+
+# Object Properties
+
+defra-reg:documentsPermit a owl:ObjectProperty ;
+    rdfs:label "document permit"@en ;
+    rdfs:domain defra-reg:PermitDocument ;
+    rdfs:range defra-reg:Permit ;
+    rdfs:subPropertyOf defra-core:about .
+
+defra-reg:action a owl:ObjectProperty ;
+    rdfs:label "action"@en ;
+    rdfs:domain defra-reg:Driver ;
+    rdfs:range defra-reg:Action ;
+    owl:inverseOf defra-reg:driver ;
+     .
+
+defra-reg:driver a owl:ObjectProperty ;
+    rdfs:label "driver"@en ;
+    rdfs:domain defra-reg:Action ;
+    rdfs:range defra-reg:Driver ;
+    owl:inverseOf defra-reg:action ;
+     .
+
+defra-reg:permitHolder a owl:ObjectProperty ;
+    rdfs:label "permit holder"@en ;
+    rdfs:domain defra-reg:Permit ;
+    rdfs:range defra-core:Party ;
+     .
+
+defra-reg:permitSite a owl:ObjectpOperty ;
+    rdfs:label "permit for site"@en ;
+    rdfs:domain defra-reg:Permit ;
+    rdfs:range defra-core:Site ;
+     .
+
+defra-reg:actionOwner a owl:ObjectProperty ;
+    rdfs:label "action owner"@en ;
+    rdfs:domain defra-reg:Action ;
+    rdfs:range defra-core:Party ;
+     .
+
+defra-reg:hasLimit a owl:ObjectProperty ;
+    rdfs:label "has limit"@en ;
+    rdfs:domain defra-reg:Condition ;
+    rdfs:range defra-reg:Limit ;
+     .
+
+# Datatype Properties
+
+defra-reg:completionDate a owl:DatatypeProperty ;
+    rdfs:label "completion date"@en ;
+    rdfs:domain defra-reg:Action ;
+    rdfs:range xsd:date ;
+     .

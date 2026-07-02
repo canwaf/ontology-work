@@ -1,0 +1,37 @@
+@prefix defra-core: <http://environment.data.gov.uk/ontology/core/> .
+@prefix defra-water: <http://environment.data.gov.uk/ontology/water/> .
+@prefix defra-reg: <http://environment.data.org.uk/ontology/regulation/> .
+@prefix dcterms:   <http://purl.org/dc/terms/> .
+@prefix foaf:      <http://xmlns.com/foaf/0.1/> .
+@prefix geo:       <http://www.opengis.net/ont/geosparql#> .
+@prefix org:       <http://www.w3.org/ns/org#> .
+@prefix owl:       <http://www.w3.org/2002/07/owl#> .
+@prefix prov:      <http://www.w3.org/ns/prov#> .
+@prefix rdfs:      <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix schema:    <https://schema.org/> .
+@prefix skos:      <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd:       <http://www.w3.org/2001/XMLSchema#> .
+
+<http://environment.data.gov.uk/ontology/water>
+    a owl:Ontology ;
+    dcterms:title "DEFRA Water Ontology"@en ;
+    dcterms:description "Water reusable classes and properties for DEFRA Linked Data APIs, covering WaterBody, Catchment, DischargePoint, EffluentType, WaterDischargeActivity."@en ;
+    dcterms:creator "Department for Environment, Food and Rural Affairs"@en ;
+    dcterms:publisher "Department for Environment, Food and Rural Affairs"@en ;
+    dcterms:license <http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/> ;
+    dcterms:created "2026-07-01"^^xsd:date ;
+    owl:versionInfo "0.1.0" ;
+    rdfs:seeAlso <http://environment.data.gov.uk/catalog> .
+
+defra-water:WaterBody
+    a owl:Class ;
+    rdfs:label "Water Body"@en ;
+    rdfs:comment "A body of surface water, groundwater or coastal water relevant to water management, regulation or reporting."@en ;
+    rdfs:subClassOf defra-core:Site .
+
+defra-water:Catchment
+    a owl:Class ;
+    rdfs:label "Catchment"@en ;
+    rdfs:comment "An area from which water drains to a water body or watercourse."@en ;
+    rdfs:subClassOf defra-core:Site .
+
