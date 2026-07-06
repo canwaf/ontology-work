@@ -41,6 +41,18 @@ defra-reg:Limit a owl:Class ;
     rdfs:comment "A permitted range for a regulated property, expressed as an optional upper and/or lower bound quantity value. Intended to grow to handle rolling averages and nth percentile calculations."@en ;
      .
 
+defra-reg:ProposedLimit a owl:Class ;
+    rdfs:subClassOf defra-reg:Limit ;
+    rdfs:label "Proposed Limit"@en ;
+    rdfs:comment "A limit proposed by an improvement action that is not yet in force. Once the action matures it is expected to become a condition limit on the target permit."@en ;
+     .
+
+defra-reg:CarriedOverLimit a owl:Class ;
+    rdfs:subClassOf defra-reg:ProposedLimit ;
+    rdfs:label "Carried-Over Limit"@en ;
+    rdfs:comment "A proposed limit that carries an existing permit condition forward unchanged (a continuance), rather than introducing a new bound."@en ;
+     .
+
 defra-reg:ConditionBreach a owl:Class ;
     rdfs:label "Condition Breach"@en ;
     rdfs:comment "A condition breach is allocated to a permit where limits set forth in conditions have been breached. A breach has an Applicability, a Condition breached, and has an evidenced set of Observations which resulted in the breach."@en ;
@@ -65,7 +77,7 @@ defra-reg:Driver a owl:Class ;
 
 defra-reg:Action a owl:Class ;
     rdfs:label "Action"@en ;
-    rdfs:comment "To be defined."@en ;
+    rdfs:comment "An improvement action carried out to address one or more drivers, located at a site, and which may propose new limits for a target permit. Has a completion date after which its proposed limits are expected to take effect."@en ;
      .
 
 defra-reg:DischargePoint a owl:Class ;
@@ -121,6 +133,36 @@ defra-reg:actionOwner a owl:ObjectProperty ;
     rdfs:range defra-core:Party ;
      .
 
+defra-reg:actionSite a owl:ObjectProperty ;
+    rdfs:label "action site"@en ;
+    rdfs:comment "The site at which an improvement action is delivered."@en ;
+    rdfs:domain defra-reg:Action ;
+    rdfs:range defra-core:Site ;
+     .
+
+defra-reg:targetPermit a owl:ObjectProperty ;
+    rdfs:subPropertyOf dcterms:relation ;
+    rdfs:label "target permit"@en ;
+    rdfs:comment "The permit that an improvement action proposes to change."@en ;
+    rdfs:domain defra-reg:Action ;
+    rdfs:range defra-reg:Permit ;
+     .
+
+defra-reg:proposesLimit a owl:ObjectProperty ;
+    rdfs:label "proposes limit"@en ;
+    rdfs:comment "A new limit that this improvement action proposes for its target permit; not yet in force."@en ;
+    rdfs:domain defra-reg:Action ;
+    rdfs:range defra-reg:ProposedLimit ;
+     .
+
+defra-reg:continuesCondition a owl:ObjectProperty ;
+    rdfs:subPropertyOf dcterms:relation ;
+    rdfs:label "continues condition"@en ;
+    rdfs:comment "The in-force condition that this proposed limit carries forward unchanged."@en ;
+    rdfs:domain defra-reg:ProposedLimit ;
+    rdfs:range defra-reg:Condition ;
+     .
+
 defra-reg:hasLimit a owl:ObjectProperty ;
     rdfs:label "has limit"@en ;
     rdfs:domain defra-reg:Condition ;
@@ -129,8 +171,8 @@ defra-reg:hasLimit a owl:ObjectProperty ;
 
 defra-reg:regulatedProperty a owl:ObjectProperty ;
     rdfs:label "regulated property"@en ;
-    rdfs:comment "The observable property (substance, parameter) that this condition places a limit on."@en ;
-    rdfs:domain defra-reg:Condition ;
+    rdfs:comment "The observable property (substance, parameter) that this condition or limit places a bound on."@en ;
+    rdfs:domain [ a owl:Class ; owl:unionOf ( defra-reg:Condition defra-reg:Limit ) ] ;
     rdfs:range sosa:ObservableProperty ;
      .
 
@@ -170,4 +212,11 @@ defra-reg:completionDate a owl:DatatypeProperty ;
     rdfs:label "completion date"@en ;
     rdfs:domain defra-reg:Action ;
     rdfs:range xsd:date ;
+     .
+
+defra-reg:limitStatement a owl:DatatypeProperty ;
+    rdfs:label "limit statement"@en ;
+    rdfs:comment "A verbatim natural-language statement of a limit that has not been formalised into structured upper/lower bounds and requires human interpretation. Used to capture source text that cannot be parsed deterministically, in place of (or alongside) a quantity-value bound."@en ;
+    rdfs:domain defra-reg:Limit ;
+    rdfs:range xsd:string ;
      .

@@ -10,6 +10,7 @@
 @prefix rdfs:      <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix schema:    <https://schema.org/> .
 @prefix skos:      <http://www.w3.org/2004/02/skos/core#> .
+@prefix sosa:      <http://www.w3.org/ns/sosa/> .
 @prefix xsd:       <http://www.w3.org/2001/XMLSchema#> .
 
 <http://environment.data.gov.uk/ontology/water>
@@ -40,4 +41,12 @@ defra-water:WaterDischargePermit
     rdfs:label "Water Discharge Permit"@en ;
     rdfs:comment "A permit authorising the discharge of effluent to controlled waters, subject to conditions."@en ;
     rdfs:subClassOf defra-reg:Permit .
+
+defra-water:monitoredAt
+    a owl:ObjectProperty ;
+    rdfs:subPropertyOf dcterms:relation ;
+    rdfs:label "monitored at"@en ;
+    rdfs:comment "Relates a discharge point to the sampling point at which its discharges are monitored. Via a permit's discharge points, this says how the permit is monitored."@en ;
+    rdfs:domain defra-reg:DischargePoint ;
+    rdfs:range sosa:FeatureOfInterest .
 
