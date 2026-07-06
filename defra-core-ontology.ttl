@@ -124,7 +124,7 @@ defra-core:documentText a owl:DatatypeProperty ;
 
 # Applicability
 defra-core:Applicability a owl:Class ;
-    rdfs:label "applicability"@en ;
+    rdfs:label "Applicability"@en ;
     rdfs:comment "A statement describing when, where, to whom, or to what a resource applies."@en .
 
 defra-core:ApplicabilityPeriod a owl:Class ;
@@ -134,9 +134,11 @@ defra-core:ApplicabilityPeriod a owl:Class ;
      .
 
 defra-core:hasApplicability a owl:ObjectProperty ;
+    rdfs:subPropertyOf dcterms:relation ;
     rdfs:label "has applicability"@en ;
     rdfs:comment "Relates a resource to a statement describing its applicability."@en ;
-    rdfs:range defra-core:Applicability .
+    rdfs:range defra-core:Applicability ;
+     .
 
 defra-core:appliesTo a owl:ObjectProperty ;
     rdfs:label "applies to"@en ;

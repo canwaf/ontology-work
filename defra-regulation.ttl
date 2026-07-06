@@ -3,7 +3,9 @@
 @prefix defra-core: <http://environment.data.gov.uk/ontology/core/> .
 @prefix defra-reg: <http://environment.data.gov.uk/ontology/regulation/> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sosa: <http://www.w3.org/ns/sosa/> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
 <http://environment.data.gov.uk/ontology/regulation> a owl:Ontology ;
@@ -19,12 +21,12 @@
 
 defra-reg:Permit a owl:Class ;
     rdfs:subClassOf dcat:Resource ;
-    rdfs:label "permit"@en ;
+    rdfs:label "Permit"@en ;
     rdfs:comment "A regulatory permission that authorises one or more regulated activities and may subject to conditions."@en .
 
 defra-reg:PermitDocument a owl:Class ;
     rdfs:subClassOf defra-core:Document ;
-    rdfs:label "permit document"@en ;
+    rdfs:label "Permit Document"@en ;
     rdfs:comment "A document that records, issues, varies or describes a permit."@en .
 
 defra-reg:Condition a owl:Class ;
@@ -37,9 +39,9 @@ defra-reg:Limit a owl:Class ;
     rdfs:comment "This is going to be a complex class that needs to handle upper and/or lower bounds, rolling averages, and nth percentile calculations."@en ;
      .
 
-defra-reg:Breach a owl:Class ;
-    rdfs:label "Permit Breach"@en ;
-    rdfs:comment "A permit breach is allocated to a permit where limits set forth in conditions have been breached. A breach can be a time instant or a time period."@en ;
+defra-reg:ConditionBreach a owl:Class ;
+    rdfs:label "Condition Breach"@en ;
+    rdfs:comment "A condition breach is allocated to a permit where limits set forth in conditions have been breached. A breach has an Applicability, a Condition breached, and has an evidenced set of Observations which resulted in the breach."@en ;
      .
 
 defra-reg:Driver a owl:Class ;
@@ -53,7 +55,7 @@ defra-reg:Action a owl:Class ;
      .
 
 defra-reg:DischargePoint a owl:Class ;
-    rdfs:label "discharge point"@en ;
+    rdfs:label "Discharge Point"@en ;
     rdfs:comment "A point at which a discharge enters, or is authorised to enter, the environment."@en ;
     rdfs:subClassOf defra-core:Site .
 
@@ -63,7 +65,15 @@ defra-reg:documentsPermit a owl:ObjectProperty ;
     rdfs:label "document permit"@en ;
     rdfs:domain defra-reg:PermitDocument ;
     rdfs:range defra-reg:Permit ;
-    rdfs:subPropertyOf defra-core:about .
+    rdfs:subPropertyOf defra-core:about ;
+     .
+
+defra-reg:hasCondition a owl:ObjectProperty ;
+    rdfs:subPropertyOf dcterms:relation ;
+    rdfs:label "has condition"@en ;
+    rdfs:domain defra-reg:Permit ;
+    rdfs:range defra-reg:Condition ;
+     .
 
 defra-reg:action a owl:ObjectProperty ;
     rdfs:label "action"@en ;
@@ -85,7 +95,7 @@ defra-reg:permitHolder a owl:ObjectProperty ;
     rdfs:range defra-core:Party ;
      .
 
-defra-reg:permitSite a owl:ObjectpOperty ;
+defra-reg:permitSite a owl:ObjectProperty ;
     rdfs:label "permit for site"@en ;
     rdfs:domain defra-reg:Permit ;
     rdfs:range defra-core:Site ;
@@ -101,6 +111,22 @@ defra-reg:hasLimit a owl:ObjectProperty ;
     rdfs:label "has limit"@en ;
     rdfs:domain defra-reg:Condition ;
     rdfs:range defra-reg:Limit ;
+     .
+
+defra-reg:evidencedByObservation a owl:ObjectProperty ;
+    rdfs:subPropertyOf prov:wasDerivedFrom ;
+    rdfs:label "evidencing observations"@en ;
+    rdfs:comment "Relates a condition breach to a (set of) observation(s) that provides evidence for the breach."@en ;
+    rdfs:domain defra-reg:ConditionBreach ;
+    rdfs:range sosa:Observation ;
+     .
+
+defra-reg:breachesCondition a owl:ObjectProperty ;
+    rdfs:subPropertyOf dcterms:relation ;
+    rdfs:label "breaches condition"@en ;
+    rdfs:comment "Relates a condition breach to the permit condition that has been breached."@en ;
+    rdfs:domain defra-reg:ConditionBreach ;
+    rdfs:range defra-reg:Condition ;
      .
 
 # Datatype Properties
