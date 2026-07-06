@@ -1,6 +1,6 @@
 @prefix defra-core: <http://environment.data.gov.uk/ontology/core/> .
 @prefix defra-water: <http://environment.data.gov.uk/ontology/water/> .
-@prefix defra-reg: <http://environment.data.org.uk/ontology/regulation/> .
+@prefix defra-reg: <http://environment.data.gov.uk/ontology/regulation/> .
 @prefix dcterms:   <http://purl.org/dc/terms/> .
 @prefix foaf:      <http://xmlns.com/foaf/0.1/> .
 @prefix geo:       <http://www.opengis.net/ont/geosparql#> .
@@ -34,4 +34,10 @@ defra-water:Catchment
     rdfs:label "Catchment"@en ;
     rdfs:comment "An area from which water drains to a water body or watercourse."@en ;
     rdfs:subClassOf defra-core:Site .
+
+defra-water:WaterDischargePermit
+    a owl:Class ;
+    rdfs:label "Water Discharge Permit"@en ;
+    rdfs:comment "A permit authorising the discharge of effluent to controlled waters, subject to conditions."@en ;
+    rdfs:subClassOf defra-reg:Permit .
 

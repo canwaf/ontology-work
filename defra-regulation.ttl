@@ -4,6 +4,7 @@
 @prefix defra-reg: <http://environment.data.gov.uk/ontology/regulation/> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix qudt: <http://qudt.org/schema/qudt/> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix sosa: <http://www.w3.org/ns/sosa/> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
@@ -35,13 +36,26 @@ defra-reg:Condition a owl:Class ;
      .
 
 defra-reg:Limit a owl:Class ;
+    rdfs:subClassOf qudt:Quantity ;
     rdfs:label "Limit"@en ;
-    rdfs:comment "This is going to be a complex class that needs to handle upper and/or lower bounds, rolling averages, and nth percentile calculations."@en ;
+    rdfs:comment "A permitted range for a regulated property, expressed as an optional upper and/or lower bound quantity value. Intended to grow to handle rolling averages and nth percentile calculations."@en ;
      .
 
 defra-reg:ConditionBreach a owl:Class ;
     rdfs:label "Condition Breach"@en ;
     rdfs:comment "A condition breach is allocated to a permit where limits set forth in conditions have been breached. A breach has an Applicability, a Condition breached, and has an evidenced set of Observations which resulted in the breach."@en ;
+     .
+
+defra-reg:ExceedanceBreach a owl:Class ;
+    rdfs:subClassOf defra-reg:ConditionBreach ;
+    rdfs:label "Exceedance Breach"@en ;
+    rdfs:comment "A condition breach where an observed value exceeded the condition's upper bound."@en ;
+     .
+
+defra-reg:ShortfallBreach a owl:Class ;
+    rdfs:subClassOf defra-reg:ConditionBreach ;
+    rdfs:label "Shortfall Breach"@en ;
+    rdfs:comment "A condition breach where an observed value fell below the condition's lower bound."@en ;
      .
 
 defra-reg:Driver a owl:Class ;
@@ -111,6 +125,27 @@ defra-reg:hasLimit a owl:ObjectProperty ;
     rdfs:label "has limit"@en ;
     rdfs:domain defra-reg:Condition ;
     rdfs:range defra-reg:Limit ;
+     .
+
+defra-reg:regulatedProperty a owl:ObjectProperty ;
+    rdfs:label "regulated property"@en ;
+    rdfs:comment "The observable property (substance, parameter) that this condition places a limit on."@en ;
+    rdfs:domain defra-reg:Condition ;
+    rdfs:range sosa:ObservableProperty ;
+     .
+
+defra-reg:upperBound a owl:ObjectProperty ;
+    rdfs:label "upper bound"@en ;
+    rdfs:comment "The maximum permitted quantity value for a limit."@en ;
+    rdfs:domain defra-reg:Limit ;
+    rdfs:range qudt:QuantityValue ;
+     .
+
+defra-reg:lowerBound a owl:ObjectProperty ;
+    rdfs:label "lower bound"@en ;
+    rdfs:comment "The minimum permitted quantity value for a limit."@en ;
+    rdfs:domain defra-reg:Limit ;
+    rdfs:range qudt:QuantityValue ;
      .
 
 defra-reg:evidencedByObservation a owl:ObjectProperty ;
