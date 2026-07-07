@@ -2,7 +2,9 @@
 @prefix defra-core: <http://environment.data.gov.uk/ontology/core/> .
 @prefix defra-farming: <http://environment.data.gov.uk/ontology/farming/> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix qudt: <http://qudt.org/schema/qudt/> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
 <http://environment.data.gov.uk/ontology/water>
@@ -24,5 +26,46 @@ defra-farming:Application a owl:Class ;
 defra-farming:Option a owl:Class ;
     rdfs:subClassOf defra-core:DocumentPart ;
     rdfs:label "Option" ;
+    .
+
+defra-farming:PaymentRate a owl:Class ;
+    rdfs:subClassOf qudt:QuantityValue ;
+    rdfs:label "Payment Rate" ;
+    rdfs:comment "A scheme payment quoted as a monetary amount of a currency paid per a unit of measured extent — for example £1074 per hectare, or £10 per 100 metres. The monetary amount is carried by qudt:numericValue with qudt:unit a currency; the extent it is paid per is given by defra-farming:perQuantity."@en ;
+    .
+
+defra-farming:paymentRate a owl:ObjectProperty ;
+    rdfs:label "payment rate" ;
+    rdfs:comment "Relates a scheme option concept to the rate it is paid at."@en ;
+    rdfs:domain skos:Concept ;
+    rdfs:range defra-farming:PaymentRate ;
+    .
+
+defra-farming:perQuantity a owl:ObjectProperty ;
+    rdfs:label "per quantity" ;
+    rdfs:comment "The unit extent a payment rate is paid per (e.g. 1 hectare, or 100 metres), as a qudt:QuantityValue."@en ;
+    rdfs:domain defra-farming:PaymentRate ;
+    rdfs:range qudt:QuantityValue ;
+    .
+
+defra-farming:paymentNote a owl:DatatypeProperty ;
+    rdfs:label "payment note" ;
+    rdfs:comment "Verbatim, uninterpreted qualifying text on a payment rate (the source 'more pay info', e.g. 'for both sides of an eligible hedgerow per year'). Not applied when computing option cost."@en ;
+    rdfs:domain defra-farming:PaymentRate ;
+    rdfs:range xsd:string ;
+    .
+
+defra-farming:duration a owl:DatatypeProperty ;
+    rdfs:label "duration" ;
+    rdfs:comment "The verbatim commitment duration of a scheme option (e.g. '3 years')."@en ;
+    rdfs:domain skos:Concept ;
+    rdfs:range xsd:string ;
+    .
+
+defra-farming:annualPayment a owl:ObjectProperty ;
+    rdfs:label "annual payment" ;
+    rdfs:comment "The annual monetary value of an option for a given application, being its measured extent valued at the classifying concept's payment rate. This is the base rate only and does not apply any qualifying payment note."@en ;
+    rdfs:domain defra-farming:Option ;
+    rdfs:range qudt:QuantityValue ;
     .
 
