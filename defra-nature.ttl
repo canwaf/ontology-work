@@ -1,0 +1,23 @@
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix defra-core: <http://environment.data.gov.uk/ontology/core/> .
+@prefix defra-nature: <http://environment.data.gov.uk/ontology/nature/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://environment.data.gov.uk/ontology/nature>
+    a owl:Ontology ;
+    dcterms:title "DEFRA Nature / Designations Ontology"@en ;
+    dcterms:description "Reusable classes for statutorily protected conservation sites (SSSI, SAC, SPA) for DEFRA Linked Data APIs. The designation type is carried with defra-core:hasClassification to a concept in the designation-type codelist (reference data, not part of this ontology)."@en ;
+    dcterms:creator "Department for Environment, Food and Rural Affairs"@en ;
+    dcterms:publisher "Department for Environment, Food and Rural Affairs"@en ;
+    dcterms:license <http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/> ;
+    dcterms:created "2026-07-07"^^xsd:date ;
+    owl:versionInfo "0.1.0" ;
+    rdfs:seeAlso <http://environment.data.gov.uk/catalog> .
+
+defra-nature:ProtectedSite a owl:Class ;
+    rdfs:subClassOf defra-core:Site ;
+    rdfs:label "Protected Site" ;
+    rdfs:comment "A statutorily designated conservation site (e.g. an SSSI, SAC or SPA). Its designation type is given by defra-core:hasClassification; its geometry (inherited via defra-core:Site ⊆ geo:Feature) by geo:hasGeometry."@en ;
+    .
