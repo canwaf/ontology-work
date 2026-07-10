@@ -4,15 +4,19 @@ This repository is an effort to create a linked data domain model for the Defra 
 
 ## Project Structure
 
-The model is currently composed of three primary ontologies:
+The model is currently composed of two primary ontologies:
 - **Core Ontology**: Provides reusable classes and properties (e.g., Party, Organisation, Site, Document).
 - **Regulation Ontology**: Covers regulatory concepts such as Permits, Conditions, Limits, and Breaches.
+
+And three ontologies which extend the primary ontologies to address domain specific components:
+- **Farming Ontology**: Contains specific domain knowledge regarding Sustainable Farming Incentive Schemes, Applcations, and Options.
+- **Nature Ontology**: COntains specific domain knowledge regarding Protected Sites.
 - **Water Ontology**: Contains specific domain knowledge regarding Water Bodies, Catchments, and related activities.
 
 ## Status
 
-**Work in Progress / Strawman**
-Please note that this project is currently a work in progress. It is being constructed as a "strawman" for consideration and is subject to major changes as it is being developed.
+**Work in Progress**
+Please note that this project is currently a work in progress. It is being constructed as a foil to begin formal consideration of DEFRA's domain and is subject to major changes as it is being developed.
 
 ## Legacy Data
 
