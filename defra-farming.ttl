@@ -7,7 +7,7 @@
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-<http://environment.data.gov.uk/ontology/water>
+<http://environment.data.gov.uk/ontology/farming>
     a owl:Ontology ;
     dcterms:title "DEFRA Farming Ontology"@en ;
     dcterms:description "Farming reusable classes and properties for DEFRA Linked Data APIs, covering Sustainable Farming Incentive Schemes, Applications, and Options."@en ;
