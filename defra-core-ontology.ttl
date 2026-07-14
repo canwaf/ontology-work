@@ -156,11 +156,11 @@ defra-core:applicableFrom a owl:DatatypeProperty ;
     rdfs:comment "The date from which an applicability statement applies."@en ;
     rdfs:subPropertyOf dcat:startDate ;
     rdfs:domain defra-core:ApplicabilityPeriod ;
-    rdfs:range xsd:date .
+    rdfs:range xsd:dateTime .
 
 defra-core:applicableTo a owl:DatatypeProperty ;
     rdfs:label "applicable to"@en ;
     rdfs:comment "The date until which an applicability statement applies."@en ;
     rdfs:subPropertyOf dcat:endDate ;
     rdfs:domain defra-core:ApplicabilityPeriod ;
-    rdfs:range xsd:date .
+    rdfs:range xsd:dateTime .

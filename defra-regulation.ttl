@@ -2,6 +2,7 @@
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix defra-core: <http://environment.data.gov.uk/ontology/core/> .
 @prefix defra-reg: <http://environment.data.gov.uk/ontology/regulation/> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix prov: <http://www.w3.org/ns/prov#> .
 @prefix qudt: <http://qudt.org/schema/qudt/> .
@@ -55,17 +56,23 @@ defra-reg:CarriedOverLimit a owl:Class ;
 
 defra-reg:ConditionBreach a owl:Class ;
     rdfs:label "Condition Breach"@en ;
-    rdfs:comment "A condition breach is allocated to a permit where limits set forth in conditions have been breached. A breach has an Applicability, a Condition breached, and has an evidenced set of Observations which resulted in the breach."@en ;
+    rdfs:comment "A condition breach is allocated to a permit where limits set forth in conditions have been breached. A condition breach has an Applicability, a Condition breached, and has an evidenced set of Observations which resulted in the breach."@en ;
+     .
+
+defra-reg:LimitBreach a owl:Class ;
+    rdfs:subClassOf defra-reg:ConditionBreach ;
+    rdfs:label "Limit Breach"@en ;
+    rdfs:comment "A limit breach is allocated to a permit where limits set forth in conditions have been breached. A limit breach has an Applicability, a Limit breached, and has an evidenced set of Observations which resulted in the breach."@en ;
      .
 
 defra-reg:ExceedanceBreach a owl:Class ;
-    rdfs:subClassOf defra-reg:ConditionBreach ;
+    rdfs:subClassOf defra-reg:LimitBreach ;
     rdfs:label "Exceedance Breach"@en ;
     rdfs:comment "A condition breach where an observed value exceeded the condition's upper bound."@en ;
      .
 
 defra-reg:ShortfallBreach a owl:Class ;
-    rdfs:subClassOf defra-reg:ConditionBreach ;
+    rdfs:subClassOf defra-reg:LimitBreach ;
     rdfs:label "Shortfall Breach"@en ;
     rdfs:comment "A condition breach where an observed value fell below the condition's lower bound."@en ;
      .
@@ -88,10 +95,10 @@ defra-reg:DischargePoint a owl:Class ;
 # Object Properties
 
 defra-reg:documentsPermit a owl:ObjectProperty ;
+    rdfs:subPropertyOf foaf:primaryTopic ;
     rdfs:label "document permit"@en ;
     rdfs:domain defra-reg:PermitDocument ;
     rdfs:range defra-reg:Permit ;
-    rdfs:subPropertyOf defra-core:about ;
      .
 
 defra-reg:hasCondition a owl:ObjectProperty ;
@@ -172,7 +179,7 @@ defra-reg:hasLimit a owl:ObjectProperty ;
 defra-reg:regulatedProperty a owl:ObjectProperty ;
     rdfs:label "regulated property"@en ;
     rdfs:comment "The observable property (substance, parameter) that this condition or limit places a bound on."@en ;
-    rdfs:domain [ a owl:Class ; owl:unionOf ( defra-reg:Condition defra-reg:Limit ) ] ;
+    rdfs:domain [ a owl:Class ; owl:unionOf (defra-reg:Condition defra-reg:Limit) ] ;
     rdfs:range sosa:ObservableProperty ;
      .
 
@@ -206,13 +213,15 @@ defra-reg:breachesCondition a owl:ObjectProperty ;
     rdfs:range defra-reg:Condition ;
      .
 
-# Datatype Properties
-
-defra-reg:completionDate a owl:DatatypeProperty ;
-    rdfs:label "completion date"@en ;
-    rdfs:domain defra-reg:Action ;
-    rdfs:range xsd:date ;
+defra-reg:breachesLimit a owl:ObjectProperty ;
+    rdfs:subPropertyOf dcterms:relation ;
+    rdfs:label "breaches limit"@en ;
+    rdfs:comment "Relates a limit breach to the permit condition limit that has been breached."@en ;
+    rdfs:domain defra-reg:LimitBreach ;
+    rdfs:range defra-reg:Limit ;
      .
+
+# Datatype Properties
 
 defra-reg:limitStatement a owl:DatatypeProperty ;
     rdfs:label "limit statement"@en ;
